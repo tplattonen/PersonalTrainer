@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Customerlist from './components/Customerlist';
 import Traininglist from './components/Traininglist';
+import Calender from './components/Calender';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/home" />
             <Route path="/customers" component={Customerlist} />
             <Route path="/trainings" component={Traininglist} />
+            <Route path="/calender" component={Calender} />
           </Switch>
         </div>
       </BrowserRouter>

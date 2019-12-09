@@ -3,7 +3,8 @@ import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
-import { Home, Book, AccountBox } from '@material-ui/icons'
+import { Home, Book, AccountBox } from '@material-ui/icons';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import { Link } from 'react-router-dom';
 
 
@@ -28,6 +29,12 @@ function NavBar(props) {
                 <ListItemText inset>
                     <Typography color="inherit" variant="title">
                         <Link to="/customers" style={{paddingLeft: 13, textDecoration: 'none', color: 'white'}}>Customers</Link> <AccountBox />
+                    </Typography>
+                </ListItemText>
+
+                <ListItemText inset>
+                    <Typography color="inherit" variant="title">
+                        <Link to="/calender" style={{paddingLeft: 13, textDecoration: 'none', color: 'white'}}>Calender</Link> <CalendarTodayIcon />
                     </Typography>
                 </ListItemText>
             </ListItem>

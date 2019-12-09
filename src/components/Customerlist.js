@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+import Addcustomer from './Addcustomer';
+import Editcustomer from './Editcustomer';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
+import Grid from '@material-ui/core/Grid';
 
 const Customerlist = () => {
     const [customers, setCustomers] = useState([]);
@@ -21,7 +24,7 @@ const Customerlist = () => {
         fetch('https://customerrest.herokuapp.com/api/customers')
             .then(response => response.json())
             .then(data => setCustomers(data.content))
-    }
+    };
 
     const deleteCustomer = (link) => {
         if (window.confirm('Are you sure you want to delete customer?'))
@@ -30,7 +33,38 @@ const Customerlist = () => {
                 .then(res => setMessage('Customer deleted'))
                 .then(res => setOpen(true))
                 .catch(error => console.error(error))
-    }
+    };
+
+    const saveCustomer = (newCustomer) => {
+        fetch('https://customerrest.herokuapp.com/api/customers',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newCustomer)
+            }
+        )
+            .then(res => fetchCustomers())
+            .then(res => setMessage('New customer saved successfully!'))
+            .then(res => setOpen(true))
+            .catch(err => console.error(err))
+    };
+
+    const updateCustomer = (customer, link) => {
+        fetch(link, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(customer)
+        })
+            .then(res => fetchCustomers())
+            .then(res => setMessage('Customer information updated successfully!'))
+            .then(res => setOpen(true))
+            .catch(err => console.log(err))
+    };
+
 
     const columns = [
         {
@@ -62,6 +96,12 @@ const Customerlist = () => {
             accessor: 'phone'
         },
         {
+            filterable: false,
+            sortable: false,
+            width: 100,
+            Cell: row => <Editcustomer updateCustomer={updateCustomer} customer={row.original} />
+        },
+        {
            accessor: 'links[0].href',
            filterable: false,
            sortable: false,
@@ -71,6 +111,11 @@ const Customerlist = () => {
 
     return (
         <div>
+            <Grid container>
+                <Grid item>
+                    <Addcustomer saveCustomer={saveCustomer} />
+                </Grid>
+            </Grid>
             <ReactTable filterable={true} columns={columns} data={customers} />
             <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} message={message} />
         </div>
