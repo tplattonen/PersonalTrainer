@@ -6,14 +6,16 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import moment from 'moment';
 
 export default function Trainingtocustomer(props) {
     const [open, setOpen] = useState(false);
     const [training, setTraining] = useState(
-        { date: '', duration: '', activity: '' }
+        { id: '', date: '', duration: '', activity: '', customer: '', newDateValue: '' }
     );
 
     const handleClickOpen = () => {
+        setTraining({ ...training, duration: '', sdate: moment().format('YYYY-MM-DDTHH:MM'), id: props.customer.firstname + ' ' + props.customer.lastname, customer: props.customer.links[0].href })
         setOpen(true);
     };
 
@@ -21,19 +23,25 @@ export default function Trainingtocustomer(props) {
         setOpen(false);
     };
 
+    /* inputchanged */
     const handleChange = (event) => {
         setTraining({ ...training, [event.target.name]: event.target.value })
         console.log(training)
     };
 
-    const addTrainingtoC = () => {
+    const handleDateChange = (event) => {
+        let updatedDate = moment(event.target.value).format();
+        setTraining({ ...training, newDateValue: event.target.value, date: updatedDate})
+    }
+
+    const addTrainingToCustomer = () => {
         props.trainingToCustomer(training);
         handleClose();
     };
 
     return (
-        <div style={{ margin: 10 }}>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        <div>
+            <Button color="primary" onClick={handleClickOpen}>
                 Add training
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -43,12 +51,19 @@ export default function Trainingtocustomer(props) {
                         Fill the information for the new training.
                 </DialogContentText>
                     <TextField
+                        margin="dense"
+                        value={training.id}
+                        label="For customer"
+                        fullWidth
+                    />
+                    <TextField
                         autoFocus
+                        type="datetime-local"
                         margin="dense"
                         name="date"
-                        value={training.date}
-                        onChange={e => handleChange(e)}
-                        label="Date"
+                        value={training.newDateValue}
+                        onChange={e => handleDateChange(e)}
+                        label="Training starts"
                         fullWidth
                     />
                     <TextField
@@ -73,11 +88,12 @@ export default function Trainingtocustomer(props) {
                     <Button onClick={handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={addTrainingtoC} color="primary">
+                    <Button onClick={addTrainingToCustomer} color="primary">
                         Save
                     </Button>
                 </DialogActions>
             </Dialog>
         </div>
-    )
-}
+    );
+};
+

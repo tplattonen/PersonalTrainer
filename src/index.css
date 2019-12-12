@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.MuiAppBar-colorPrimary {
+  background-color: rgba(5, 5, 5, 0.829);
+  height: 95px;
+  justify-content: center;
+}
+
+.cardDeck {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.bannerCarousel {
+  height: 400px;
+}
+
+.MuiCardRoot {
+  flex: 1;
+  display: inline-block;
+}
+
+.logo {
+  margin: 5px;
+}
