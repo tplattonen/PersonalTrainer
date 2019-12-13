@@ -7,22 +7,9 @@ import Trainingtocustomer from './Addtrainingtocustomer';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
+
 
 const Customerlist = () => {
-    const styles = withStyles ({
-        root: {
-          background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-          border: 0,
-          borderRadius: 3,
-          boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-          color: 'white',
-          height: 48,
-          padding: '0 30px',
-        },
-      });
-    
-        
     
     const [customers, setCustomers] = useState([]);
     const [open, setOpen] = useState(false);
@@ -153,7 +140,7 @@ const Customerlist = () => {
                         <Addcustomer saveCustomer={saveCustomer} />
                     </Grid>
                 </Grid>
-                <ReactTable filterable={true} columns={columns} data={customers} />
+                <ReactTable filterable={true} columns={columns} data={customers} className="Tables" />
                 <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} message={message} />
             </div>
         </div>

@@ -95,7 +95,7 @@ const Traininglist = () => {
     }
     return (
         <div>
-            <ReactTable filterable={true} columns={columns} data={trainings} />
+            <ReactTable filterable={true} columns={columns} data={trainings} className="Tables"/>
             <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} message={message} />
         </div>
     );

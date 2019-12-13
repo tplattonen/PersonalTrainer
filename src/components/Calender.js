@@ -47,6 +47,7 @@ const Calendar = () => {
                     events={customerTrainings}
                     rerenderEvents={true}
                     eventClick={eventClick}
+                    borderColor="#030303"
                 />
             </div>
         </div>   

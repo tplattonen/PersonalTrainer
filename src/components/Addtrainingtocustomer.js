@@ -35,7 +35,7 @@ export default function Trainingtocustomer(props) {
     }
 
     const addTrainingToCustomer = () => {
-        props.trainingToCustomer(training);
+        props.addTrainingToCustomer(training);
         handleClose();
     };
 
