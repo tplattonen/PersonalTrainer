@@ -45,7 +45,7 @@ export default function Trainingtocustomer(props) {
                 Add training
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">New Car</DialogTitle>
+                <DialogTitle id="form-dialog-title">New Training</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Fill the information for the new training.
